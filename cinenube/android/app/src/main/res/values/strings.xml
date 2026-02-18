@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CineNube</string>
+    <string name="login_title">Inicio de sesión</string>
+    <string name="hint_usuario">tu_usuario</string>
+    <string name="hint_clave">XXXX-XXX-XXX</string>
+    <string name="btn_ingresar">INGRESAR</string>
+    <string name="btn_salir">Salir</string>
+    <string name="btn_ver">VER</string>
+    <string name="btn_ver_trailer">VER TRÁILER</string>
+    <string name="sin_peliculas">No hay películas disponibles</string>
+    <string name="error_conexion">No se pudo conectar al servidor</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="cerrar_sesion_confirm">¿Estás seguro que deseas cerrar sesión?</string>
+</resources>

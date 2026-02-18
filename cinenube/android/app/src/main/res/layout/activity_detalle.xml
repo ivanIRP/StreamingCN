@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/surface_card"
+        app:titleTextColor="@color/white"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Imagen de portada -->
+            <ImageView
+                android:id="@+id/iv_poster"
+                android:layout_width="160dp"
+                android:layout_height="220dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:background="@color/surface_card"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Nombre -->
+            <TextView
+                android:id="@+id/tv_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"/>
+
+            <!-- Género -->
+            <TextView
+                android:id="@+id/tv_genero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/accent_orange"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Descripción -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SINOPSIS"
+                android:textColor="@color/text_muted"
+                android:textSize="10sp"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- URL del Tráiler -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TRÁILER"
+                android:textColor="@color/text_muted"
+                android:textSize="10sp"
+                android:letterSpacing="0.1"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_trailer_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/surface_input"
+                android:padding="12dp"
+                android:textColor="@color/accent_orange"
+                android:textSize="12sp"
+                android:layout_marginBottom="20dp"/>
+
+            <!-- Botón Ver Tráiler -->
+            <Button
+                android:id="@+id/btn_ver_trailer"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="VER TRÁILER"
+                android:textSize="16sp"
+                android:letterSpacing="0.1"
+                android:backgroundTint="@color/accent_red"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
