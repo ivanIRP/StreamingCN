@@ -1,0 +1,7 @@
+// en app/build.gradle
+android {
+    defaultConfig {
+        minSdk 21 // Cambia el valor anterior (ej: 19) a este
+        ...
+    }
+}
