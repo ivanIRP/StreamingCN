@@ -1,19 +1,12 @@
-import js from "@eslint/js";
-import globals from "globals";
-
 export default [
-  js.configs.recommended,
   {
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
       globals: {
         ...globals.browser,
-      },
-    },
-    rules: {
-      "no-unused-vars": "off", 
-      "no-undef": "warn"      
+        renderPeliculas: "readonly", 
+        renderClientes: "readonly",
+        renderUsuarios: "readonly"
+      }
     }
   }
 ];
