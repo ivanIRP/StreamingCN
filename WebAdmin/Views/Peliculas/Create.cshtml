@@ -1,0 +1,87 @@
+@model MoviesWeb.Models.Pelicula
+@{ ViewData["Title"] = "Agregar Película"; }
+
+<style>
+    .form-control, .form-select, textarea {
+        background-color: #333 !important;
+        color: #fff !important;
+        border: 1px solid #555 !important;
+    }
+    .form-control::placeholder, textarea::placeholder {
+        color: #aaa !important;
+    }
+    .form-select option {
+        background-color: #333;
+        color: #fff;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header" style="background-color: #e50914;">
+                <h4 class="mb-0 text-white"><i class="fas fa-plus-circle me-2"></i>Agregar Nueva Película</h4>
+            </div>
+            <div class="card-body">
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <p>@error.ErrorMessage</p>
+                        }
+                    </div>
+                }
+
+                <form asp-action="Create" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="mb-3">
+                        <label asp-for="Nombre" class="form-label"></label>
+                        <input asp-for="Nombre" class="form-control" placeholder="Ej: El Padrino" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Sinopsis" class="form-label"></label>
+                        <textarea asp-for="Sinopsis" class="form-control" rows="5" placeholder="Descripción..."></textarea>
+                        <span asp-validation-for="Sinopsis" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Categoria" class="form-label"></label>
+                            <select asp-for="Categoria" class="form-select">
+                                <option value="">Seleccionar</option>
+                                <option value="Acción">Acción</option>
+                                <option value="Aventura">Aventura</option>
+                                <option value="Ciencia Ficción">Ciencia Ficción</option>
+                                <option value="Comedia">Comedia</option>
+                                <option value="Crimen">Crimen</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Fantasía">Fantasía</option>
+                                <option value="Horror">Horror</option>
+                                <option value="Romance">Romance</option>
+                                <option value="Suspenso">Suspenso</option>
+                            </select>
+                            <span asp-validation-for="Categoria" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Anio" class="form-label"></label>
+                            <input asp-for="Anio" type="number" class="form-control" placeholder="2024" min="1900" max="2100" />
+                            <span asp-validation-for="Anio" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label asp-for="LinkPelicula" class="form-label"></label>
+                        <input asp-for="LinkPelicula" class="form-control" placeholder="https://..." />
+                        <span asp-validation-for="LinkPelicula" class="text-danger"></span>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-save me-2"></i>Guardar</button>
+                        <a href="/Peliculas" class="btn btn-secondary btn-lg">Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+@{ ViewData["Title"] = "Inicio"; }
+<h2 class="mb-4"><i class="fas fa-home me-2" style="color: #e50914;"></i>Dashboard</h2>
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="card" style="background: linear-gradient(135deg, #e50914, #b20710);">
+            <div class="card-body text-center">
+                <h3 class="fw-bold text-white">@(ViewBag.Peliculas?.Count ?? 0)</h3>
+                <p class="mb-0 text-white">Total Películas</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="d-grid gap-3">
+    <a href="/Peliculas/Create" class="btn btn-primary btn-lg">
+        <i class="fas fa-plus me-2"></i>Agregar Nueva Película
+    </a>
+    <a href="/Peliculas" class="btn btn-outline-light btn-lg">
+        <i class="fas fa-list me-2"></i>Ver Todas las Películas
+    </a>
+</div>

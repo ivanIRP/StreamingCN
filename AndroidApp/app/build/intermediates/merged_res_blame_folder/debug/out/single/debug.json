@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "com.moviesapp.client.app-merged_res-33:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.moviesapp.client.app-main-35:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.moviesapp.client.app-merged_res-33:/drawable_rounded_bg.xml.flat",
+        "source": "com.moviesapp.client.app-main-35:/drawable/rounded_bg.xml"
+    },
+    {
+        "merged": "com.moviesapp.client.app-merged_res-33:/layout_item_pelicula.xml.flat",
+        "source": "com.moviesapp.client.app-main-35:/layout/item_pelicula.xml"
+    },
+    {
+        "merged": "com.moviesapp.client.app-merged_res-33:/layout_activity_main.xml.flat",
+        "source": "com.moviesapp.client.app-main-35:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.moviesapp.client.app-merged_res-33:/drawable_rounded_bg_secondary.xml.flat",
+        "source": "com.moviesapp.client.app-main-35:/drawable/rounded_bg_secondary.xml"
+    }
+]

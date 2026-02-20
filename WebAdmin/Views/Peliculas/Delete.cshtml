@@ -1,0 +1,21 @@
+@model MoviesWeb.Models.Pelicula
+@{ ViewData["Title"] = "Eliminar"; }
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white"><h4 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Confirmar Eliminación</h4></div>
+            <div class="card-body">
+                <div class="alert alert-warning"><strong>¿Eliminar esta película?</strong></div>
+                <h5 class="text-white">@Model.Nombre (@Model.Anio)</h5>
+                <p class="text-white-50">@Model.Categoria</p>
+                <form asp-action="Delete" method="post" class="mt-4">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-danger btn-lg">Sí, Eliminar</button>
+                        <a href="/Peliculas" class="btn btn-secondary btn-lg">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
