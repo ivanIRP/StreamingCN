@@ -22,7 +22,6 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  /* LOGIN */
   #login-screen {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
     background: radial-gradient(ellipse at 30% 50%, #1a0a12 0%, #0a0a0f 60%);
@@ -65,7 +64,6 @@
   .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
   .login-error { color: var(--accent); font-size: 0.8rem; text-align: center; margin-top: 0.8rem; display: none; }
 
-  /* APP */
   #app-screen { display: none; min-height: 100vh; }
   .navbar {
     background: var(--card); border-bottom: 1px solid var(--border);
@@ -91,7 +89,6 @@
   .section-title { font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
   .section-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
 
-  /* FORMS */
   .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 2px; padding: 2rem; margin-bottom: 2rem; }
   .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
   .form-group select {
@@ -115,13 +112,11 @@
   .btn-yellow { background: var(--warning); color: #0a0a0f; }
   .btn-sm { padding: 0.35rem 0.8rem; font-size: 0.75rem; }
 
-  /* READONLY INPUT */
   .input-readonly { background: rgba(255,255,255,0.03) !important; color: var(--muted) !important; cursor: not-allowed; }
   .clave-display { display: flex; gap: 0.5rem; align-items: center; }
   .clave-display input { flex: 1; }
   .clave-badge { background: rgba(230,57,70,0.1); color: var(--accent); font-size: 0.65rem; padding: 0.2rem 0.5rem; border-radius: 2px; white-space: nowrap; }
 
-  /* TABLE */
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; }
   th { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
@@ -143,7 +138,6 @@
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
     <div class="login-avatar">
@@ -347,7 +341,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
