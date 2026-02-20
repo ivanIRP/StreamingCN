@@ -27,7 +27,6 @@
     </div>
     <button class="btn-primary" onclick="doLogin()">INGRESAR</button>
     <div class="login-error" id="login-error">Usuario o contraseña incorrectos</div>
-    <p style="text-align:center;color:var(--muted);font-size:0.72rem;margin-top:1.5rem">Demo: admin / admin123</p>
   </div>
 </div>
 
@@ -37,8 +36,8 @@
     <div class="nav-tabs">
       <button class="nav-tab active" onclick="showSection('peliculas-reg')">Registrar Película</button>
       <button class="nav-tab" onclick="showSection('peliculas-con')">Consultar Películas</button>
-      <button class="nav-tab" onclick="showSection('clientes')">Consultar Clientes</button>
-      <button class="nav-tab" onclick="showSection('usuarios')">Registro de Usuarios</button>
+      <button class="nav-tab" onclick="showSection('clientes')">Clientes</button>
+      <button class="nav-tab" onclick="showSection('usuarios')">Administradores</button>
     </div>
     <div class="navbar-right">
       <span id="admin-name" style="font-size:0.8rem;color:var(--muted)"></span>
@@ -49,7 +48,6 @@
   <div class="content">
     <div class="section active" id="sec-peliculas-reg">
       <div class="section-title">Registrar Nueva Película</div>
-      <div class="section-sub">Agrega una nueva película a la plataforma</div>
       <div class="form-card">
         <div class="form-grid">
           <div class="form-group"><label>Nombre</label><input type="text" id="peli-nombre"></div>
@@ -58,7 +56,6 @@
             <select id="peli-genero">
               <option value="">Seleccionar...</option>
               <option>Acción</option><option>Drama</option><option>Terror</option>
-              <option>Ciencia Ficción</option><option>Comedia</option>
             </select>
           </div>
           <div class="form-group"><label>URL Imagen</label><input type="text" id="peli-imagen"></div>
@@ -67,18 +64,15 @@
         <div class="form-group" style="margin-top:1rem">
           <label>Descripción</label><textarea id="peli-desc"></textarea>
         </div>
-        <div class="form-actions">
-          <button class="btn btn-red" onclick="registrarPelicula()">REGISTRAR</button>
-        </div>
+        <button class="btn btn-red" onclick="registrarPelicula()">REGISTRAR</button>
       </div>
     </div>
 
     <div class="section" id="sec-peliculas-con">
-      <div class="section-title">Consultar Películas</div>
       <div class="form-card">
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Imagen</th><th>Nombre</th><th>Género</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <thead><tr><th>Imagen</th><th>Nombre</th><th>Género</th><th>Acciones</th></tr></thead>
             <tbody id="tabla-peliculas"></tbody>
           </table>
         </div>
@@ -86,36 +80,33 @@
     </div>
 
     <div class="section" id="sec-clientes">
-      <div class="section-title">Clientes</div>
       <div class="form-card">
-         <div class="form-grid">
-            <div class="form-group"><label>Nombre</label><input type="text" id="cli-nombre"></div>
-            <div class="form-group"><label>Email</label><input type="email" id="cli-email"></div>
-            <div class="form-group"><label>Usuario</label><input type="text" id="cli-usuario"></div>
-            <div class="form-group"><label>Clave</label><input type="text" id="cli-clave" readonly class="input-readonly"></div>
-         </div>
-         <button class="btn btn-red" onclick="registrarCliente()">REGISTRAR CLIENTE</button>
-         <div class="table-wrap" style="margin-top:2rem">
-            <table><tbody id="tabla-clientes"></tbody></table>
-         </div>
+        <div class="form-grid">
+          <input type="text" id="cli-nombre" placeholder="Nombre">
+          <input type="email" id="cli-email" placeholder="Email">
+          <input type="text" id="cli-usuario" placeholder="Usuario">
+          <input type="text" id="cli-clave" readonly class="input-readonly">
+        </div>
+        <button class="btn btn-red" onclick="registrarCliente()" style="margin-top:1rem">REGISTRAR CLIENTE</button>
+        <div class="table-wrap" style="margin-top:2rem">
+          <table><tbody id="tabla-clientes"></tbody></table>
+        </div>
       </div>
     </div>
 
     <div class="section" id="sec-usuarios">
-      <div class="section-title">Administradores</div>
       <div class="form-card">
-         <div class="form-grid">
-            <div class="form-group"><label>Usuario</label><input type="text" id="usr-usuario"></div>
-            <div class="form-group"><label>Pass</label><input type="password" id="usr-pass"></div>
-            <div class="form-group"><label>Clave</label><input type="text" id="usr-clave" readonly class="input-readonly"></div>
-         </div>
-         <button class="btn btn-red" onclick="registrarUsuario()">REGISTRAR ADMIN</button>
-         <div class="table-wrap" style="margin-top:2rem">
-            <table><tbody id="tabla-usuarios"></tbody></table>
-         </div>
+        <div class="form-grid">
+          <input type="text" id="usr-usuario" placeholder="Admin User">
+          <input type="password" id="usr-pass" placeholder="Password">
+          <input type="text" id="usr-clave" readonly class="input-readonly">
+        </div>
+        <button class="btn btn-red" onclick="registrarUsuario()" style="margin-top:1rem">REGISTRAR ADMIN</button>
+        <div class="table-wrap" style="margin-top:2rem">
+          <table><tbody id="tabla-usuarios"></tbody></table>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
 
