@@ -1,140 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CineNube - Plataforma de Streaming</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --card: #16161e;
-    --border: #252530;
-    --accent: #e63946;
-    --accent2: #f4a261;
-    --text: #f0f0f5;
-    --muted: #6b6b80;
-    --success: #2ec4b6;
-    --warning: #f4a261;
-    --danger: #e63946;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
-  #login-screen {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    background: radial-gradient(ellipse at 30% 50%, #1a0a12 0%, #0a0a0f 60%);
-    position: relative; overflow: hidden;
-  }
-  #login-screen::before {
-    content: 'CINENUBE'; position: absolute; font-family: 'Bebas Neue'; font-size: 28vw;
-    color: rgba(230,57,70,0.04); top: 50%; left: 50%; transform: translate(-50%,-50%);
-    pointer-events: none; white-space: nowrap; letter-spacing: 0.05em;
-  }
-  .login-box {
-    background: var(--card); border: 1px solid var(--border); border-radius: 2px;
-    padding: 3rem 2.5rem; width: 380px; position: relative; z-index: 1;
-    box-shadow: 0 0 80px rgba(230,57,70,0.08);
-  }
-  .login-box::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-  .login-avatar {
-    width: 80px; height: 80px; background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
-    border-radius: 50%; margin: 0 auto 2rem; display: flex; align-items: center;
-    justify-content: center; border: 2px solid var(--border);
-  }
-  .login-avatar svg { width: 40px; height: 40px; opacity: 0.5; }
-  .login-title { font-family: 'Bebas Neue'; font-size: 1.8rem; letter-spacing: 0.1em; text-align: center; margin-bottom: 2rem; color: var(--text); }
-  .form-group { margin-bottom: 1.2rem; }
-  .form-group label { display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
-  .form-group input {
-    width: 100%; background: var(--surface); border: 1px solid var(--border);
-    color: var(--text); padding: 0.75rem 1rem; font-family: 'DM Sans'; font-size: 0.9rem;
-    border-radius: 2px; outline: none; transition: border-color 0.2s;
-  }
-  .form-group input:focus { border-color: var(--accent); }
-  .btn-primary {
-    width: 100%; background: var(--accent); color: white; border: none; padding: 0.9rem;
-    font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 0.15em; cursor: pointer;
-    border-radius: 2px; margin-top: 0.5rem; transition: opacity 0.2s, transform 0.1s;
-  }
-  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
-  .login-error { color: var(--accent); font-size: 0.8rem; text-align: center; margin-top: 0.8rem; display: none; }
-
-  #app-screen { display: none; min-height: 100vh; }
-  .navbar {
-    background: var(--card); border-bottom: 1px solid var(--border);
-    padding: 0 2rem; display: flex; align-items: stretch; position: sticky; top: 0; z-index: 100;
-  }
-  .navbar-brand { font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 0.1em; display: flex; align-items: center; margin-right: 3rem; }
-  .navbar-brand span { color: var(--accent); }
-  .nav-tabs { display: flex; gap: 0; flex: 1; }
-  .nav-tab {
-    padding: 1rem 1.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
-    text-transform: uppercase; cursor: pointer; border: none; background: none; color: var(--muted);
-    border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap;
-  }
-  .nav-tab:hover { color: var(--text); }
-  .nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(230,57,70,0.04); }
-  .navbar-right { display: flex; align-items: center; gap: 1rem; margin-left: auto; }
-  .logout-btn { background: none; border: 1px solid var(--border); color: var(--muted); padding: 0.4rem 1rem; font-size: 0.75rem; cursor: pointer; border-radius: 2px; transition: all 0.2s; font-family: 'DM Sans'; }
-  .logout-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-  .content { padding: 2rem; max-width: 1200px; margin: 0 auto; }
-  .section { display: none; }
-  .section.active { display: block; }
-  .section-title { font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
-  .section-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 2rem; }
-
-  .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 2px; padding: 2rem; margin-bottom: 2rem; }
-  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-  .form-group select {
-    width: 100%; background: var(--surface); border: 1px solid var(--border);
-    color: var(--text); padding: 0.75rem 1rem; font-family: 'DM Sans'; font-size: 0.9rem;
-    border-radius: 2px; outline: none;
-  }
-  .form-group textarea {
-    width: 100%; background: var(--surface); border: 1px solid var(--border);
-    color: var(--text); padding: 0.75rem 1rem; font-family: 'DM Sans'; font-size: 0.9rem;
-    border-radius: 2px; outline: none; resize: vertical; min-height: 100px;
-  }
-  .form-group input[type="file"] { color: var(--muted); }
-  .form-actions { margin-top: 1.5rem; display: flex; gap: 1rem; }
-  .btn { padding: 0.65rem 1.5rem; border: none; cursor: pointer; font-family: 'Bebas Neue'; font-size: 0.95rem; letter-spacing: 0.1em; border-radius: 2px; transition: all 0.2s; }
-  .btn-red { background: var(--accent); color: white; }
-  .btn-red:hover { opacity: 0.85; }
-  .btn-outline { background: none; border: 1px solid var(--border); color: var(--muted); }
-  .btn-outline:hover { border-color: var(--text); color: var(--text); }
-  .btn-green { background: var(--success); color: #0a0a0f; }
-  .btn-yellow { background: var(--warning); color: #0a0a0f; }
-  .btn-sm { padding: 0.35rem 0.8rem; font-size: 0.75rem; }
-
-  .input-readonly { background: rgba(255,255,255,0.03) !important; color: var(--muted) !important; cursor: not-allowed; }
-  .clave-display { display: flex; gap: 0.5rem; align-items: center; }
-  .clave-display input { flex: 1; }
-  .clave-badge { background: rgba(230,57,70,0.1); color: var(--accent); font-size: 0.65rem; padding: 0.2rem 0.5rem; border-radius: 2px; white-space: nowrap; }
-
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; }
-  th { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-  td { padding: 0.9rem 1rem; border-bottom: 1px solid rgba(37,37,48,0.5); font-size: 0.88rem; vertical-align: middle; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: rgba(255,255,255,0.02); }
-  .movie-img { width: 50px; height: 70px; object-fit: cover; border-radius: 2px; background: var(--surface); display: block; }
-  .status-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 2px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; }
-  .badge-active { background: rgba(46,196,182,0.15); color: var(--success); }
-  .badge-inactive { background: rgba(230,57,70,0.12); color: var(--accent); }
-  .actions-cell { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-
-  .empty-state { text-align: center; padding: 3rem; color: var(--muted); }
-  .empty-state svg { width: 48px; height: 48px; opacity: 0.3; margin-bottom: 1rem; }
-  .toast { position: fixed; bottom: 2rem; right: 2rem; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--success); padding: 1rem 1.5rem; border-radius: 2px; font-size: 0.85rem; z-index: 1000; transform: translateX(200%); transition: transform 0.3s; max-width: 300px; }
-  .toast.show { transform: translateX(0); }
-  .toast.error { border-left-color: var(--accent); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineNube - Plataforma de Streaming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -176,433 +47,80 @@
   </nav>
 
   <div class="content">
-
     <div class="section active" id="sec-peliculas-reg">
       <div class="section-title">Registrar Nueva Película</div>
       <div class="section-sub">Agrega una nueva película a la plataforma</div>
       <div class="form-card">
         <div class="form-grid">
-          <div class="form-group">
-            <label>Nombre de la Película</label>
-            <input type="text" id="peli-nombre" placeholder="Ej: Inception">
-          </div>
+          <div class="form-group"><label>Nombre</label><input type="text" id="peli-nombre"></div>
           <div class="form-group">
             <label>Género</label>
             <select id="peli-genero">
-              <option value="">Seleccionar género...</option>
-              <option>Acción</option><option>Comedia</option><option>Drama</option>
-              <option>Terror</option><option>Ciencia Ficción</option><option>Romance</option>
-              <option>Animación</option><option>Documental</option><option>Thriller</option>
+              <option value="">Seleccionar...</option>
+              <option>Acción</option><option>Drama</option><option>Terror</option>
+              <option>Ciencia Ficción</option><option>Comedia</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Cargar Imagen (URL)</label>
-            <input type="text" id="peli-imagen" placeholder="https://imagen.jpg">
-          </div>
-          <div class="form-group">
-            <label>Ruta del Tráiler (URL)</label>
-            <input type="text" id="peli-trailer" placeholder="https://youtube.com/...">
-          </div>
+          <div class="form-group"><label>URL Imagen</label><input type="text" id="peli-imagen"></div>
+          <div class="form-group"><label>URL Tráiler</label><input type="text" id="peli-trailer"></div>
         </div>
         <div class="form-group" style="margin-top:1rem">
-          <label>Descripción</label>
-          <textarea id="peli-desc" placeholder="Sinopsis de la película..."></textarea>
+          <label>Descripción</label><textarea id="peli-desc"></textarea>
         </div>
         <div class="form-actions">
           <button class="btn btn-red" onclick="registrarPelicula()">REGISTRAR</button>
-          <button class="btn btn-outline" onclick="limpiarFormPeli()">LIMPIAR</button>
         </div>
       </div>
     </div>
 
     <div class="section" id="sec-peliculas-con">
       <div class="section-title">Consultar Películas</div>
-      <div class="section-sub">Gestiona el catálogo de películas registradas</div>
       <div class="form-card">
         <div class="table-wrap">
           <table>
-            <thead>
-              <tr>
-                <th>Imagen</th><th>Nombre</th><th>Género</th><th>Descripción</th><th>Tráiler</th><th>Estado</th><th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody id="tabla-peliculas">
-              <tr><td colspan="7"><div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg><p>No hay películas registradas</p></div></td></tr>
-            </tbody>
+            <thead><tr><th>Imagen</th><th>Nombre</th><th>Género</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="tabla-peliculas"></tbody>
           </table>
         </div>
       </div>
     </div>
 
     <div class="section" id="sec-clientes">
-      <div class="section-title">Registro de Clientes</div>
-      <div class="section-sub">Administra los clientes de la plataforma</div>
+      <div class="section-title">Clientes</div>
       <div class="form-card">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" id="cli-nombre" placeholder="Nombre">
-          </div>
-          <div class="form-group">
-            <label>Apellido Paterno</label>
-            <input type="text" id="cli-ap" placeholder="Apellido Paterno">
-          </div>
-          <div class="form-group">
-            <label>Apellido Materno</label>
-            <input type="text" id="cli-am" placeholder="Apellido Materno">
-          </div>
-          <div class="form-group">
-            <label>Correo Electrónico</label>
-            <input type="email" id="cli-email" placeholder="correo@ejemplo.com">
-          </div>
-          <div class="form-group">
-            <label>Usuario / Correo de acceso</label>
-            <input type="text" id="cli-usuario" placeholder="usuario_app">
-          </div>
-          <div class="form-group">
-            <label>Clave (generada automáticamente)</label>
-            <div class="clave-display">
-              <input type="text" id="cli-clave" class="input-readonly" readonly>
-              <span class="clave-badge">AUTO</span>
-            </div>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-red" onclick="registrarCliente()">REGISTRAR</button>
-          <button class="btn btn-outline" onclick="limpiarFormCli()">LIMPIAR</button>
-        </div>
-      </div>
-      <div class="form-card">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Nombre Completo</th><th>Correo</th><th>Usuario</th><th>Clave</th><th>Fecha Registro</th><th>Estado</th><th>Acciones</th></tr>
-            </thead>
-            <tbody id="tabla-clientes">
-              <tr><td colspan="7"><div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><p>No hay clientes registrados</p></div></td></tr>
-            </tbody>
-          </table>
-        </div>
+         <div class="form-grid">
+            <div class="form-group"><label>Nombre</label><input type="text" id="cli-nombre"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="cli-email"></div>
+            <div class="form-group"><label>Usuario</label><input type="text" id="cli-usuario"></div>
+            <div class="form-group"><label>Clave</label><input type="text" id="cli-clave" readonly class="input-readonly"></div>
+         </div>
+         <button class="btn btn-red" onclick="registrarCliente()">REGISTRAR CLIENTE</button>
+         <div class="table-wrap" style="margin-top:2rem">
+            <table><tbody id="tabla-clientes"></tbody></table>
+         </div>
       </div>
     </div>
 
     <div class="section" id="sec-usuarios">
-      <div class="section-title">Registro de Usuarios Administradores</div>
-      <div class="section-sub">Gestiona los administradores de la plataforma web</div>
+      <div class="section-title">Administradores</div>
       <div class="form-card">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" id="usr-nombre" placeholder="Nombre">
-          </div>
-          <div class="form-group">
-            <label>Apellido Paterno</label>
-            <input type="text" id="usr-ap" placeholder="Apellido Paterno">
-          </div>
-          <div class="form-group">
-            <label>Apellido Materno</label>
-            <input type="text" id="usr-am" placeholder="Apellido Materno">
-          </div>
-          <div class="form-group">
-            <label>Correo Electrónico</label>
-            <input type="email" id="usr-email" placeholder="correo@ejemplo.com">
-          </div>
-          <div class="form-group">
-            <label>Usuario</label>
-            <input type="text" id="usr-usuario" placeholder="usuario_admin">
-          </div>
-          <div class="form-group">
-            <label>Contraseña</label>
-            <input type="password" id="usr-pass" placeholder="••••••••">
-          </div>
-          <div class="form-group">
-            <label>Clave (generada automáticamente)</label>
-            <div class="clave-display">
-              <input type="text" id="usr-clave" class="input-readonly" readonly>
-              <span class="clave-badge">AUTO</span>
-            </div>
-          </div>
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-red" onclick="registrarUsuario()">REGISTRAR</button>
-          <button class="btn btn-outline" onclick="limpiarFormUsr()">LIMPIAR</button>
-        </div>
-      </div>
-      <div class="form-card">
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>Nombre Completo</th><th>Correo / Usuario</th><th>Clave</th><th>Fecha Registro</th><th>Estado</th><th>Acciones</th></tr>
-            </thead>
-            <tbody id="tabla-usuarios">
-              <tr><td colspan="6"><div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><p>No hay administradores registrados</p></div></td></tr>
-            </tbody>
-          </table>
-        </div>
+         <div class="form-grid">
+            <div class="form-group"><label>Usuario</label><input type="text" id="usr-usuario"></div>
+            <div class="form-group"><label>Pass</label><input type="password" id="usr-pass"></div>
+            <div class="form-group"><label>Clave</label><input type="text" id="usr-clave" readonly class="input-readonly"></div>
+         </div>
+         <button class="btn btn-red" onclick="registrarUsuario()">REGISTRAR ADMIN</button>
+         <div class="table-wrap" style="margin-top:2rem">
+            <table><tbody id="tabla-usuarios"></tbody></table>
+         </div>
       </div>
     </div>
+
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script>
-let admins = [{ nombre:'Admin', apellidoP:'Sistema', apellidoM:'', email:'admin@cine.com', usuario:'admin', pass:'admin123', clave: genClave(), fecha: hoy(), activo: true }];
-let peliculas = [];
-let clientes = [];
-let currentAdmin = null;
-
-function genClave() {
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  let c = '';
-  for(let i=0;i<10;i++) c += chars[Math.floor(Math.random()*chars.length)];
-  return c.slice(0,4)+'-'+c.slice(4,7)+'-'+c.slice(7,10);
-}
-
-function hoy() {
-  return new Date().toLocaleDateString('es-MX');
-}
-
-function showToast(msg, type='ok') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (type==='error'?' error':'');
-  setTimeout(()=>t.className='toast',2800);
-}
-
-function doLogin() {
-  const u = document.getElementById('login-user').value.trim();
-  const p = document.getElementById('login-pass').value.trim();
-  const found = admins.find(a => a.usuario===u && a.pass===p && a.activo);
-  if(found) {
-    currentAdmin = found;
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('app-screen').style.display='block';
-    document.getElementById('admin-name').textContent = found.nombre + ' ' + found.apellidoP;
-    document.getElementById('login-error').style.display='none';
-    renderAutoClaves();
-  } else {
-    document.getElementById('login-error').style.display='block';
-  }
-}
-
-function doLogout() {
-  currentAdmin = null;
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('app-screen').style.display='none';
-  document.getElementById('login-user').value='';
-  document.getElementById('login-pass').value='';
-}
-
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('sec-'+id).classList.add('active');
-  event.target.classList.add('active');
-  if(id==='peliculas-con') renderPeliculas();
-  if(id==='clientes') renderClientes();
-  if(id==='usuarios') renderUsuarios();
-}
-
-function renderAutoClaves() {
-  document.getElementById('cli-clave').value = genClave();
-  document.getElementById('usr-clave').value = genClave();
-}
-
-function registrarPelicula() {
-  const n = document.getElementById('peli-nombre').value.trim();
-  const g = document.getElementById('peli-genero').value;
-  const img = document.getElementById('peli-imagen').value.trim();
-  const d = document.getElementById('peli-desc').value.trim();
-  const t = document.getElementById('peli-trailer').value.trim();
-  if(!n||!g||!d) { showToast('Completa los campos requeridos','error'); return; }
-  peliculas.push({ id: Date.now(), nombre:n, genero:g, imagen:img, descripcion:d, trailer:t, activo:true });
-  limpiarFormPeli();
-  showToast('Película registrada correctamente');
-}
-
-function limpiarFormPeli() {
-  ['peli-nombre','peli-imagen','peli-desc','peli-trailer'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('peli-genero').value='';
-}
-
-function renderPeliculas() {
-  const tb = document.getElementById('tabla-peliculas');
-  if(!peliculas.length) {
-    tb.innerHTML=`<tr><td colspan="7"><div class="empty-state"><p>No hay películas registradas</p></div></td></tr>`;
-    return;
-  }
-  tb.innerHTML = peliculas.map((p,i)=>`
-    <tr>
-      <td>${p.imagen?`<img src="${p.imagen}" class="movie-img" onerror="this.style.background='#252530';this.src=''">` : '<div class="movie-img"></div>'}</td>
-      <td><strong>${p.nombre}</strong></td>
-      <td>${p.genero}</td>
-      <td style="max-width:200px;font-size:0.8rem;color:var(--muted)">${p.descripcion.slice(0,80)}${p.descripcion.length>80?'...':''}</td>
-      <td style="font-size:0.75rem">${p.trailer?`<a href="${p.trailer}" target="_blank" style="color:var(--accent2)">Ver tráiler</a>`:'—'}</td>
-      <td><span class="status-badge ${p.activo?'badge-active':'badge-inactive'}">${p.activo?'Activo':'Inactivo'}</span></td>
-      <td>
-        <div class="actions-cell">
-          <button class="btn btn-green btn-sm" onclick="togglePeli(${i},true)">Activar</button>
-          <button class="btn btn-red btn-sm" onclick="togglePeli(${i},false)">Inactivar</button>
-          <button class="btn btn-yellow btn-sm" onclick="editarPeliModal(${i})">Modificar</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function togglePeli(i, state) {
-  peliculas[i].activo = state;
-  renderPeliculas();
-  showToast(`Película ${state?'activada':'inactivada'}`);
-}
-
-function editarPeliModal(i) {
-  const p = peliculas[i];
-  document.getElementById('peli-nombre').value = p.nombre;
-  document.getElementById('peli-genero').value = p.genero;
-  document.getElementById('peli-imagen').value = p.imagen;
-  document.getElementById('peli-desc').value = p.descripcion;
-  document.getElementById('peli-trailer').value = p.trailer||'';
-  peliculas.splice(i,1);
-  showSection('peliculas-reg');
-  document.querySelectorAll('.nav-tab')[0].click();
-  showToast('Edita y vuelve a registrar la película');
-}
-
-function registrarCliente() {
-  const n = document.getElementById('cli-nombre').value.trim();
-  const ap = document.getElementById('cli-ap').value.trim();
-  const am = document.getElementById('cli-am').value.trim();
-  const em = document.getElementById('cli-email').value.trim();
-  const us = document.getElementById('cli-usuario').value.trim();
-  const cl = document.getElementById('cli-clave').value;
-  if(!n||!ap||!em||!us) { showToast('Completa los campos requeridos','error'); return; }
-  if(clientes.find(c=>c.usuario===us)) { showToast('El usuario ya existe','error'); return; }
-  clientes.push({ id:Date.now(), nombre:n, apellidoP:ap, apellidoM:am, email:em, usuario:us, clave:cl, fecha:hoy(), activo:true });
-  limpiarFormCli();
-  renderClientes();
-  showToast('Cliente registrado correctamente');
-}
-
-function limpiarFormCli() {
-  ['cli-nombre','cli-ap','cli-am','cli-email','cli-usuario'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('cli-clave').value = genClave();
-}
-
-function renderClientes() {
-  const tb = document.getElementById('tabla-clientes');
-  if(!clientes.length) {
-    tb.innerHTML=`<tr><td colspan="7"><div class="empty-state"><p>No hay clientes registrados</p></div></td></tr>`;
-    return;
-  }
-  tb.innerHTML = clientes.map((c,i)=>`
-    <tr>
-      <td>${c.nombre} ${c.apellidoP} ${c.apellidoM}</td>
-      <td>${c.email}</td>
-      <td>${c.usuario}</td>
-      <td><code style="font-size:0.75rem;color:var(--accent2)">${c.clave}</code></td>
-      <td>${c.fecha}</td>
-      <td><span class="status-badge ${c.activo?'badge-active':'badge-inactive'}">${c.activo?'Activo':'Inactivo'}</span></td>
-      <td>
-        <div class="actions-cell">
-          <button class="btn btn-green btn-sm" onclick="toggleCliente(${i},true)">Activar</button>
-          <button class="btn btn-red btn-sm" onclick="toggleCliente(${i},false)">Inactivar</button>
-          <button class="btn btn-yellow btn-sm" onclick="editarClienteModal(${i})">Modificar</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function toggleCliente(i,state) {
-  clientes[i].activo = state;
-  renderClientes();
-  showToast(`Cliente ${state?'activado':'inactivado'}`);
-}
-
-function editarClienteModal(i) {
-  const c = clientes[i];
-  document.getElementById('cli-nombre').value=c.nombre;
-  document.getElementById('cli-ap').value=c.apellidoP;
-  document.getElementById('cli-am').value=c.apellidoM;
-  document.getElementById('cli-email').value=c.email;
-  document.getElementById('cli-usuario').value=c.usuario;
-  document.getElementById('cli-clave').value=c.clave;
-  clientes.splice(i,1);
-  renderClientes();
-  showToast('Edita y vuelve a registrar el cliente');
-}
-
-function registrarUsuario() {
-  const n = document.getElementById('usr-nombre').value.trim();
-  const ap = document.getElementById('usr-ap').value.trim();
-  const am = document.getElementById('usr-am').value.trim();
-  const em = document.getElementById('usr-email').value.trim();
-  const us = document.getElementById('usr-usuario').value.trim();
-  const ps = document.getElementById('usr-pass').value.trim();
-  const cl = document.getElementById('usr-clave').value;
-  if(!n||!ap||!em||!us||!ps) { showToast('Completa los campos requeridos','error'); return; }
-  if(admins.find(a=>a.usuario===us)) { showToast('El usuario ya existe','error'); return; }
-  admins.push({ nombre:n, apellidoP:ap, apellidoM:am, email:em, usuario:us, pass:ps, clave:cl, fecha:hoy(), activo:true });
-  limpiarFormUsr();
-  renderUsuarios();
-  showToast('Administrador registrado correctamente');
-}
-
-function limpiarFormUsr() {
-  ['usr-nombre','usr-ap','usr-am','usr-email','usr-usuario','usr-pass'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('usr-clave').value = genClave();
-}
-
-function renderUsuarios() {
-  const tb = document.getElementById('tabla-usuarios');
-  const list = admins.filter(a=>a.usuario!=='admin');
-  if(!list.length) {
-    tb.innerHTML=`<tr><td colspan="6"><div class="empty-state"><p>No hay administradores adicionales</p></div></td></tr>`;
-    return;
-  }
-  tb.innerHTML = list.map((a,i)=>`
-    <tr>
-      <td>${a.nombre} ${a.apellidoP} ${a.apellidoM}</td>
-      <td>${a.email}<br><small style="color:var(--muted)">${a.usuario}</small></td>
-      <td><code style="font-size:0.75rem;color:var(--accent2)">${a.clave}</code></td>
-      <td>${a.fecha||'—'}</td>
-      <td><span class="status-badge ${a.activo?'badge-active':'badge-inactive'}">${a.activo?'Activo':'Inactivo'}</span></td>
-      <td>
-        <div class="actions-cell">
-          <button class="btn btn-green btn-sm" onclick="toggleAdmin(${i},true)">Activar</button>
-          <button class="btn btn-red btn-sm" onclick="toggleAdmin(${i},false)">Inactivar</button>
-          <button class="btn btn-yellow btn-sm" onclick="editarAdminModal(${i})">Modificar</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function toggleAdmin(i,state) {
-  const realIdx = admins.indexOf(admins.filter(a=>a.usuario!=='admin')[i]);
-  admins[realIdx].activo = state;
-  renderUsuarios();
-  showToast(`Administrador ${state?'activado':'inactivado'}`);
-}
-
-function editarAdminModal(i) {
-  const a = admins.filter(x=>x.usuario!=='admin')[i];
-  document.getElementById('usr-nombre').value=a.nombre;
-  document.getElementById('usr-ap').value=a.apellidoP;
-  document.getElementById('usr-am').value=a.apellidoM;
-  document.getElementById('usr-email').value=a.email;
-  document.getElementById('usr-usuario').value=a.usuario;
-  document.getElementById('usr-pass').value=a.pass;
-  document.getElementById('usr-clave').value=a.clave;
-  const realIdx = admins.indexOf(a);
-  admins.splice(realIdx,1);
-  renderUsuarios();
-  showToast('Edita y vuelve a registrar el administrador');
-}
-
-renderAutoClaves();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
