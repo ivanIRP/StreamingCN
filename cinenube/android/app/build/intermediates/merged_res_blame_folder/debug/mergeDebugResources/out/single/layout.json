@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.cinenube.app-mergeDebugResources-33:/layout/item_pelicula.xml",
+        "source": "com.cinenube.app-main-36:/layout/item_pelicula.xml"
+    },
+    {
+        "merged": "com.cinenube.app-mergeDebugResources-33:/layout/activity_peliculas.xml",
+        "source": "com.cinenube.app-main-36:/layout/activity_peliculas.xml"
+    },
+    {
+        "merged": "com.cinenube.app-mergeDebugResources-33:/layout/activity_login.xml",
+        "source": "com.cinenube.app-main-36:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.cinenube.app-mergeDebugResources-33:/layout/activity_detalle.xml",
+        "source": "com.cinenube.app-main-36:/layout/activity_detalle.xml"
+    }
+]

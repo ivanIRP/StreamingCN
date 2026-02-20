@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "com.cinenube.app-debug-34:/drawable_input_bg.xml.flat",
+        "source": "com.cinenube.app-main-36:/drawable/input_bg.xml"
+    },
+    {
+        "merged": "com.cinenube.app-debug-34:/drawable_ic_person.xml.flat",
+        "source": "com.cinenube.app-main-36:/drawable/ic_person.xml"
+    },
+    {
+        "merged": "com.cinenube.app-debug-34:/layout_activity_login.xml.flat",
+        "source": "com.cinenube.app-main-36:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.cinenube.app-debug-34:/drawable_ic_movie_placeholder.xml.flat",
+        "source": "com.cinenube.app-main-36:/drawable/ic_movie_placeholder.xml"
+    },
+    {
+        "merged": "com.cinenube.app-debug-34:/drawable_circle_bg.xml.flat",
+        "source": "com.cinenube.app-main-36:/drawable/circle_bg.xml"
+    },
+    {
+        "merged": "com.cinenube.app-debug-34:/layout_item_pelicula.xml.flat",
+        "source": "com.cinenube.app-main-36:/layout/item_pelicula.xml"
+    },
+    {
+        "merged": "com.cinenube.app-debug-34:/layout_activity_peliculas.xml.flat",
+        "source": "com.cinenube.app-main-36:/layout/activity_peliculas.xml"
+    },
+    {
+        "merged": "com.cinenube.app-debug-34:/layout_activity_detalle.xml.flat",
+        "source": "com.cinenube.app-main-36:/layout/activity_detalle.xml"
+    }
+]

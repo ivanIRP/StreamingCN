@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_dark">
+
+    <!-- TopBar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/surface_card"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CINE"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NUBE"
+                android:textColor="@color/accent_red"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_nombre_cliente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_muted"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/btn_cerrar_sesion"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:text="Salir"
+            android:textSize="11sp"
+            android:backgroundTint="@color/surface_input"/>
+
+    </LinearLayout>
+
+    <!-- Loading -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        android:indeterminateTint="@color/accent_red"/>
+
+    <!-- Empty State -->
+    <TextView
+        android:id="@+id/tv_vacio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="48dp"
+        android:text="🎬\nNo hay películas disponibles"
+        android:textColor="@color/text_muted"
+        android:textSize="14sp"
+        android:visibility="gone"/>
+
+    <!-- Lista de películas con pull-to-refresh -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:clipToPadding="false"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>
