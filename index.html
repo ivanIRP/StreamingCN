@@ -166,7 +166,6 @@
   </div>
 </div>
 
-<!-- APP -->
 <div id="app-screen">
   <nav class="navbar">
     <div class="navbar-brand">CINE<span>NUBE</span></div>
@@ -184,7 +183,6 @@
 
   <div class="content">
 
-    <!-- REGISTRO PELICULAS -->
     <div class="section active" id="sec-peliculas-reg">
       <div class="section-title">Registrar Nueva Película</div>
       <div class="section-sub">Agrega una nueva película a la plataforma</div>
@@ -223,7 +221,6 @@
       </div>
     </div>
 
-    <!-- CONSULTA PELICULAS -->
     <div class="section" id="sec-peliculas-con">
       <div class="section-title">Consultar Películas</div>
       <div class="section-sub">Gestiona el catálogo de películas registradas</div>
@@ -243,7 +240,6 @@
       </div>
     </div>
 
-    <!-- CLIENTES -->
     <div class="section" id="sec-clientes">
       <div class="section-title">Registro de Clientes</div>
       <div class="section-sub">Administra los clientes de la plataforma</div>
@@ -296,7 +292,6 @@
       </div>
     </div>
 
-    <!-- USUARIOS ADMIN -->
     <div class="section" id="sec-usuarios">
       <div class="section-title">Registro de Usuarios Administradores</div>
       <div class="section-sub">Gestiona los administradores de la plataforma web</div>
@@ -359,7 +354,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ---- STATE ----
 let admins = [{ nombre:'Admin', apellidoP:'Sistema', apellidoM:'', email:'admin@cine.com', usuario:'admin', pass:'admin123', clave: genClave(), fecha: hoy(), activo: true }];
 let peliculas = [];
 let clientes = [];
@@ -383,7 +377,6 @@ function showToast(msg, type='ok') {
   setTimeout(()=>t.className='toast',2800);
 }
 
-// ---- LOGIN ----
 function doLogin() {
   const u = document.getElementById('login-user').value.trim();
   const p = document.getElementById('login-pass').value.trim();
@@ -408,7 +401,6 @@ function doLogout() {
   document.getElementById('login-pass').value='';
 }
 
-// ---- NAV ----
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
@@ -419,13 +411,11 @@ function showSection(id) {
   if(id==='usuarios') renderUsuarios();
 }
 
-// ---- AUTO CLAVE ----
 function renderAutoClaves() {
   document.getElementById('cli-clave').value = genClave();
   document.getElementById('usr-clave').value = genClave();
 }
 
-// ---- PELICULAS ----
 function registrarPelicula() {
   const n = document.getElementById('peli-nombre').value.trim();
   const g = document.getElementById('peli-genero').value;
@@ -487,7 +477,6 @@ function editarPeliModal(i) {
   showToast('Edita y vuelve a registrar la película');
 }
 
-// ---- CLIENTES ----
 function registrarCliente() {
   const n = document.getElementById('cli-nombre').value.trim();
   const ap = document.getElementById('cli-ap').value.trim();
@@ -552,7 +541,6 @@ function editarClienteModal(i) {
   showToast('Edita y vuelve a registrar el cliente');
 }
 
-// ---- USUARIOS ADMIN ----
 function registrarUsuario() {
   const n = document.getElementById('usr-nombre').value.trim();
   const ap = document.getElementById('usr-ap').value.trim();
@@ -621,7 +609,6 @@ function editarAdminModal(i) {
   showToast('Edita y vuelve a registrar el administrador');
 }
 
-// init claves
 renderAutoClaves();
 </script>
 </body>
